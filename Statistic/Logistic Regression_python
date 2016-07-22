@@ -1,0 +1,21 @@
+python code
+
+#import library (from sklearn.linear_model import LogisticRegression)
+#Assume X (predictor training set) and Y(response training set) for training and x_test(predictor of test set)
+
+
+#train model
+model = LogisticRegression()
+
+model.fit(X,y)
+model.score(X,y)
+
+#Parameter
+print("Coefficient:",model.coef_)
+print("Intercept:",model.intercept_)
+
+#predict output
+predicted = model.predict(x_test)
+
+
+

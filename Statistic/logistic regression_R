@@ -1,0 +1,13 @@
+logistic regression is a classification method for binary response variable (1/0,yes/no) in which we find the probability of the occurrence of an event
+and fitting the data using the logit function (sigmoidal shape for modeling the data- pi = exp^B0+B1X.../1+exp^B0+B1X..)
+odds = pi/1-pi
+ln(odds)=logit(pi) =  B0+B1X+... = log odds of the outcome can be models as a linear combination of the predictor variables.
+
+x <- cbind(x_train, y_train)
+
+#train model
+logistic <- glm(y_train~. , data=x, family='binomial')
+summary(logistic)
+
+#predict output
+predicted = predict(logistic,x_test)

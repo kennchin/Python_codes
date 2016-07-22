@@ -1,0 +1,21 @@
+Python Code
+
+#import libraries (from sklearn import linear_model)
+x_train = input variables for training dataset
+y_train = response variable for training dataset
+x_test = input variables for test dataset
+predicted = predict value for test dataset
+
+#create linear regression object
+linear = linear_model.LinearRegression()
+
+#Train model
+linear.fit(x_train,y_train)
+linear.score(x_train,y_train)
+
+#Parameters
+print('Coefficient: ,linear.coef_)
+print('Intercept:,linear.intercept_)
+
+#Predict output
+predicted = linear.predict(x_test)

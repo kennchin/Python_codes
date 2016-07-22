@@ -1,0 +1,16 @@
+Python
+
+#import library (from sklearn import tree)
+#Assume x_train, y_train, x_test
+#create tree object
+
+model = tree.DecisionTreeClassifier(criterion='gini')  #criterion option:gini,entropy
+
+model = tree.DecisionTreeRegressonr() #for regression
+
+#train model
+model.fit(x_train,y_train)
+model.score(x_train,y_train)
+
+#prediction
+predicted = model.predict(x_test)

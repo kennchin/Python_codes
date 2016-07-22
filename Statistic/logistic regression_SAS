@@ -1,0 +1,84 @@
+Input Annual Dues (14.7) data
+
+data AD;
+input y x;
+datalines;
+    0.0   30.0
+    1.0   30.0
+    0.0   30.0
+    0.0   31.0
+    0.0   32.0
+    0.0   33.0
+    1.0   34.0
+    0.0   35.0
+    0.0   35.0
+    1.0   35.0
+    1.0   36.0
+    0.0   37.0
+    0.0   38.0
+    1.0   39.0
+    0.0   40.0
+    1.0   40.0
+    1.0   40.0
+    0.0   41.0
+    1.0   42.0
+    1.0   43.0
+    1.0   44.0
+    0.0   45.0
+    1.0   45.0
+    1.0   45.0
+    0.0   46.0
+    1.0   47.0
+    1.0   48.0
+    0.0   49.0
+    1.0   50.0
+    1.0   50.0
+;
+run;
+
+WHEN USING THE NATIVE SAS PROGRAM FROM YOUR PC
+
+Let’s open a menu based interface in SAS for data analysis:
+
+proc insight data=AD;
+run;
+
+To perform logistic regression analysis,
+
+1.	Click on the Analyze menu and select Fit(Y X).
+
+2.	Select variable y in the left column and then click the y button towards the right. Do the same for x.
+
+
+3.	Click on the Method button at the bottom of the display, and select a Binomial Response Distribution with a Logit Link Function. Click OK.
+
+4.	You are now back to the main Fit menu. Click OK, and the model analysis will appear.
+
+
+FOR LATER:
+One result of this analysis is to produce residuals (R_y) and fitted values (P_y) into the AD data set. 
+
+Now to plot the fitted values versus the regressors, 
+
+1.	Click on the Analyze menu and select Scatter Plot (Y X).
+2.	Select variable P_y in the left column and then click the y button towards the right. Do the same for x.
+3.	Click OK, and the graph will appear.
+
+
+WHEN USING THE SAS STUDIO ONLINE
+
+For the AD data, we can use the following code:
+
+proc logistic data=AD plots=all;
+	model y(event='1')=x / link=logit technique=fisher;
+	output out=WORK.Logistic_stats xbeta=xbeta_ predicted=pred_;
+run;
+
+where (event=’1’) indicates the “success” variable
+
+output out=WORK.Logistic_stats creates an output file with the original data and the newly created variables as follows:
+
+xbeta=xbeta_ provides the estimates from a least squares model
+
+predicted=pred_ provides the probabilities P(Y=1|xi)
+

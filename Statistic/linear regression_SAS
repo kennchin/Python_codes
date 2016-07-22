@@ -1,0 +1,29 @@
+SAS Code For Simple Linear Regression
+
+
+We first create the data set, which we call Car2_4. The predictor variable x will be denoted “sold”, and the response variable, Y as “salespeople.” This is how we create a data set in SAS internally. We can also import data from Excel or other types of files. SAS implements functions and commands via procedure or “proc” statements 
+
+data Car2_4;
+ input sold salespeople;
+ datalines;
+ 20 6
+ 18 6
+ 10 4
+ 6 2
+ 11 3
+ ;
+run;
+There is no output for this program, just the created data set. SAS implements functions and commands via procedure or “proc” statements. In order to see the actual set, we use the following procedure:  
+
+proc print data=Car2_4;
+run;
+
+To perform a thorough regression analysis on our data set, we use the following proc:
+
+proc reg data=Car2_4;
+model sold=salespeople;
+plot sold*salespeople;
+run;
+
+
+

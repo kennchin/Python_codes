@@ -1,0 +1,70 @@
+Linear regression build a model that minimizes the SSE (SS of difference between data point and regression line)
+
+R code
+
+x_train = input variables in training dataset
+y_train = response variable in training dataset
+x_test = input variables in test dataset
+
+x <- cbind(x_train,y_train)
+
+#train model and check score
+linear <- lm(y_train~x_train,data=x)
+summary(linear)
+
+#prediction
+predicted = predict(linear,x_test)
+================================================================================
+#finding SSE and parameters manually
+x = c(-2,-1,0,1,2)
+y= c(0,0,1,1,3)
+
+#plot
+plot(x,y)
+
+#calculating beta.0.hat and beta.1.hat
+
+x.bar = mean(x)
+y.bar = mean(y)
+s.xx = sum( (x-x.bar)^2 )
+s.xy = sum( (x-x.bar)*y )
+beta.1.hat = s.xy / s.xx
+beta.0.hat = y.bar - beta.1.hat*x.bar
+
+#Use R built-in function
+m = lm(y~x)
+summary(m)
+
+#calculating SSE
+
+y.hat = beta.0.hat + beta.1.hat*x
+sse = sum ( (y - y.hat)^2 )
+n = length(x)
+s = sqrt(sse/(n-2))
+
+s.beta.1 = s / sqrt(s.xx)
+s.beta.0 = sqrt(s^2 * sum(x^2) / (n*s.xx))
+
+#A 95% CI estimating beta.1
+
+lower = beta.1.hat - qt(0.975,n-2)*s.beta.1
+upper = beta.1.hat + qt(0.975,n-2)*s.beta.1
+
+# A 95% CI estimating E(Y|x=1).
+
+x.star =1
+theta.hat = beta.0.hat + beta.1.hat*x.star
+
+s.theta.hat = s*sqrt(1/n + (s.star - x.bar)^2/s.xx)
+low = theta.hat - qt(0.95,n-2)*s.theta.hat
+up = theta.hat + qt(0.95,n-2)*s.theta.hat
+
+#for many CIs
+
+x.star = seq(from = -2, to=2, by=.01)
+theta.hat = beta.0.hat + beta.1.hat*x.star
+
+s.theta.hat = s*sqrt(1/n + (s.star - x.bar)^2/s.xx)
+low = theta.hat - qt(0.95,n-2)*s.theta.hat
+up = theta.hat + qt(0.95,n-2)*s.theta.hat
+

@@ -1,0 +1,10 @@
+Decision tree is a supervised learning method for classification problem. (categorical and continuous response variable).
+It splits the population into two or more homogeneous sets based on most significant independent variables.
+
+library(rpart)
+x <- cbind(x_train,y_train)
+fit <- rpart(y_train~.,data=x,method="class")
+summary(fit)
+
+#prediction
+predicted = predict(fit,x_test)
